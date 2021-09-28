@@ -1,60 +1,42 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/quiz-new.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<body>
+    <div class="wrapper bg-white rounded">
+        <div class="content"> 
 
+            <a href="#"><span class="fa fa-angle-left pr-2"></span>Back to Question Bank</a>
+            <p class="text-muted">Multiple Choice Question</p>
+            <h1 style="text-align: center;">{{field.field_name}}</h1>
+            <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
+            {% csrf_token %}
+            {% for q in questions %}
+            <p class="text-justify h5 pb-2 font-weight-bold">{{ forloop.counter }}. {{q.question}}</p>
+            <div class="options py-3"> 
+                <label class="rounded p-2 option"> {{q.option1}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option1}} " value="Option1"> <span class="checkmark"></span> </label> 
+                <label class="rounded p-2 option"> {{q.option2}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option2}}" value="Option2"> <span class="checkmark"></span> </label> 
+                <label class="rounded p-2 option"> {{q.option3}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option3}}" value="Option3"> <span class="checkmark"></span> </label> 
+                <label class="rounded p-2 option"> {{q.option4}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option4}}" value="Option4"> <span class="checkmark"></span> </label> 
+            </div> 
+            {% endfor %}
+            <input type="submit" value="Submit Exam!" class="mx-sm-0 mx-1">
+          </form>
+        </div> 
 
-<div class="jumbotron my-4">
-
-  <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
-    {% csrf_token %}
-    <h1 style="text-align: center;">{{course.course_name}}</h1>
-    {% for q in questions%}
-    <h3 class="text-info">{{ forloop.counter }}. {{q.question}}</h3><h4 style="text-align: right;">[Marks {{q.marks}}]</h4>
-    
-        <input type="hidden" name="csrfmiddlewaretoken" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
-        
-        
-          <div class="form-check mx-4">
-            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option1}}" value="Option1">
-            <label class="form-check-label" for="option1">
-              {{q.option1}}
-            </label>
-          </div>
-
-        
-          <div class="form-check mx-4">
-            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option2}}" value="Option2">
-            <label class="form-check-label" for="option2">
-              {{q.option2}}
-            </label>
-          </div>
-
-        
-          <div class="form-check mx-4">
-            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option3}}" value="Option3">
-            <label class="form-check-label" for="option3">
-              {{q.option3}}
-            </label>
-          </div>
-
-        
-          <div class="form-check mx-4">
-            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option4}}" value="Option4">
-            <label class="form-check-label" for="option4">
-              {{q.option4}}
-            </label>
-          </div>
-
-        {% endfor %}
-        <input class="btn btn-info btn-lg"   type="submit" value="Submit">  
-    </form>
-  </div>
-
-<script> 
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script> 
     function saveAns(){  
 
         var ele = document.getElementsByTagName('input'); 
@@ -76,3 +58,7 @@
 }
 
 </script> 
+</body>
+</html>
+
+

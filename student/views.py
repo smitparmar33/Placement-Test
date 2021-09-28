@@ -90,16 +90,18 @@ def calculate_marks_view(request):
         for i in range(len(questions)):
             
             selected_ans = request.COOKIES.get(str(i+1))
+            print("selected",selected_ans)
             actual_answer = questions[i].answer
             if selected_ans == actual_answer:
                 total_marks = total_marks + questions[i].marks
-        print(request.user.id)
         user_obj = User.objects.get(id=request.user.id)
-        student = models.Student()
-        student.user=user_obj
-        student.mobile="7878585787"
+        student = models.Student.objects.get(user=user_obj)
+        # student = models.Student()
+        # student.user=user_obj
+        # student.mobile="7878585787"
+        print(total_marks)
         student.marks=total_marks
-        student.email=user_obj.email
+        # student.email=user_obj.email
         student.exam=field
         student.student=student
         student.save()

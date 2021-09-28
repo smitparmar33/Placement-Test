@@ -5,6 +5,7 @@ from django.contrib import messages
 # from mrbot.models import Exam
 from time import sleep
 from django.core.mail import send_mail,BadHeaderError
+from student.models import Student
 # from placementbot.settings import EMAIL_HOST_USER,EMAIL_HOST_PASSWORD
 # from mrbot.models import pin
 # Create your views here.
@@ -35,8 +36,8 @@ def register(request):
     if request.method=="POST":
         first_name=request.POST['fname']
         last_name = request.POST['lname']
-        tech=request.POST['tech']
         email = request.POST['email']
+        mobile = request.POST['mobile']
         username = request.POST['email']
         password1 = request.POST['psw']
         password2 = request.POST['psw-repeat']
@@ -53,6 +54,11 @@ def register(request):
                                                 email=email, password=password1)
 
                 user.save()
+                student=Student()
+                student.user=user
+                student.mobile=mobile
+                student.email=email
+                student.save()
                 messages.info(request, 'Registration successful. Please check your mail to know your chat_id')
                 return render(request,'login.html',{'color':'green'})
 
