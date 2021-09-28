@@ -1,0 +1,46 @@
+{"intents": [
+        {"tag": 1,
+        "question": ["what is PEP-8?"],
+        "answer": [["python","Enhancement","Proposal"],
+                        ["readability","format","document","design","style"],
+                        ["information","set of rules","readability","document","design"]
+                        ]
+        },
+        {"tag": 2,
+        "question": ["What type of language is python? Programming or scripting?"],
+        "answer": [["scripting"],["Object oriented"],["high level"]]
+        },
+        {"tag": 3,
+        "question": ["How is memory managed in Python?"],
+        "answer": [["private heap space"],["private","heap","space"],["private","heap"]]
+        },
+        {"tag": 4,
+        "question": ["What does [::-1] do?"],
+        "answer": [["reverse"],["reverse"],["overturn"]]
+        },
+        {"tag": 5,
+        "question": ["Is python case sensitive?"],
+        "answer": [["Yes"],["yup"],["yeah"]]
+        },
+        {"tag": 6,
+        "question": ["How can you generate random numbers in Python?"],
+        "answer": [["random.random"],["import","random"],["randint"]]
+        },
+        {"tag": 7,
+        "question": ["Is indentation required in python?"],
+        "answer": [["Yes"],["yup"],["yeah"]]
+        },
+        {"tag": 8,
+        "question": ["What are functions in Python?"],
+        "answer": [["block","code"],["set"],["call"]]
+        },
+        {"tag": 9,
+        "question": ["What is __init__?"],
+        "answer": [["method","object","instance","allocate"],[" constructor","object","instance","allocate"],["method","class","allocate"]]
+        },
+        {"tag": 10,
+        "question": ["What is a lambda function?"],
+        "answer": [["single","expression"],["one","expression"],["one","statement"]]
+        }
+   ]
+}

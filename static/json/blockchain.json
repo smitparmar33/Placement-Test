@@ -1,0 +1,22 @@
+{"intents": [
+        {"tag": 1,
+        "question": ["what is blockchain?"],
+        "answer": [["python","Enhancement","Proposal"],
+                        ["readability","format","document","design","style"],
+                        ["information","set of rules","readability","document","design"]
+                        ]
+        },
+        {"tag": 2,
+        "question": ["what is hyper ledger?"],
+        "answer": [["scripting"],["Object oriented"],["high level"]]
+        },
+        {"tag": 3,
+        "question": ["what is crypto currency?"],
+        "answer": [["private heap space"],["private","heap","space"],["private","heap"]]
+        },
+        {"tag": 4,
+        "question": ["what is btc?"],
+        "answer": [["reverse"],["reverse"],["overturn"]]
+        }
+   ]
+}

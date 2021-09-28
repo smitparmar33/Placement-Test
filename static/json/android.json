@@ -1,0 +1,19 @@
+{"intents": [
+        {"tag": 1,
+        "question": ["what is android"],
+        "answer": [["python","Enhancement","Proposal"],
+                        ["readability","format","document","design","style"],
+                        ["information","set of rules","readability","document","design"]
+                        ]
+        },
+        {"tag": 2,
+        "question": ["why android is usefull"],
+        "answer": [["scripting"],["Object oriented"],["high level"]]
+        },
+        {"tag": 3,
+        "question": ["what you know about android"],
+        "answer": [["private heap space"],["private","heap","space"],["private","heap"]]
+        }
+
+   ]
+}

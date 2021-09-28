@@ -1,0 +1,13 @@
+{"intents": [
+        {"question": ["What is the maximum possible length of an identifier?"],
+        "options": ["16","32","64","None of these above"],
+        "answer": ["None of these above"]
+        },
+        {
+        "question": ["In which year was the Python language developed?"],
+        "options": ["1995","1972","1981","1989"],
+        "answer": ["1989"]
+        }
+        
+   ]
+}
