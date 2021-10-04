@@ -1,4 +1,4 @@
-function countdown(elementName, minutes, seconds) {
+unction countdown(elementName, minutes, seconds) {
     var element, endTime, hours, mins, msLeft, time;
 
     function twoDigits(n) {
