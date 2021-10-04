@@ -1,0 +1,41 @@
+<style>
+body {margin:0;}
+
+.navbar2 {
+  overflow: hidden;
+  position: fixed;
+  text-align: right;
+
+  top: 0;
+  width: 100%;
+}
+.mcq{
+  position: absolute;
+}
+.time{
+  font-size: 25px;
+  color: red;
+  padding-right: 2%;
+
+}
+.navbar2 a {
+  float: left;
+  display: block;
+  text-align: center;
+  color: #f2f2f2;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar2 a:hover {
+  background: #ddd;
+  color: black;
+}
+
+.main {
+  padding: 16px;
+  margin-top: 30px;
+  height: 1500px; / Used in this example to enable scrolling /
+}
+</style>

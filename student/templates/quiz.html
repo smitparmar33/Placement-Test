@@ -8,14 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/quiz-new.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+    <div class="navbar2">
+            <h4 class="text-muted">MCQ | {{field.field_name}} | <span  class="time" id="demo"> </span></h4>
+                
+            </div>
     <div class="wrapper bg-white rounded">
-        <div class="content"> 
-
-            <h4 class="text-muted">Multiple Choice Question | {{field.field_name}} | <p id="demo"></p></h4>
+  
+        <div class="content my-4"> 
+            
             <!-- <h1 style="text-align: center;"></h1> -->
             <form onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
             {% csrf_token %}
@@ -62,7 +67,7 @@
 
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date("{{ time }}").getTime()+ 102000;
+var countDownDate = new Date("{{ time }}").getTime()+ 602000;
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -80,8 +85,7 @@ var x = setInterval(function() {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
+  document.getElementById("demo").innerHTML =minutes + "m " + seconds + "s ";
 
   // If the count down is finished, write some text
   if (distance < 0) {
