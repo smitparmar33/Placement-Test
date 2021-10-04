@@ -15,15 +15,15 @@
     <div class="wrapper bg-white rounded">
         <div class="content"> 
 
-            <a href="#"><span class="fa fa-angle-left pr-2"></span>Back to Question Bank</a>
-            <p class="text-muted">Multiple Choice Question</p>
-            <h1 style="text-align: center;">{{field.field_name}}</h1>
-            <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
+            <h4 class="text-muted">Multiple Choice Question | {{field.field_name}}</h4>
+            <!-- <h1 style="text-align: center;"></h1> -->
+            <form onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
             {% csrf_token %}
             {% for q in questions %}
-            <p class="text-justify h5 pb-2 font-weight-bold">{{ forloop.counter }}. {{q.question}}</p>
+            <p class="text-justify h5 pb-2 font-weight-bold" style="position: absolute; ">
+            {{ forloop.counter }}. {{q.question}} </p>  <h6 style="text-align: right; color: blue;">[Marks {{q.marks}}]</h6>
             <div class="options py-3"> 
-                <label class="rounded p-2 option"> {{q.option1}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option1}} " value="Option1"> <span class="checkmark"></span> </label> 
+                <label class="rounded p-2 option"> {{q.option1}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option1}} " value="Option1"> <span class="checkmark"></span> </label>  
                 <label class="rounded p-2 option"> {{q.option2}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option2}}" value="Option2"> <span class="checkmark"></span> </label> 
                 <label class="rounded p-2 option"> {{q.option3}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option3}}" value="Option3"> <span class="checkmark"></span> </label> 
                 <label class="rounded p-2 option"> {{q.option4}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option4}}" value="Option4"> <span class="checkmark"></span> </label> 
@@ -41,7 +41,7 @@
 
         var ele = document.getElementsByTagName('input'); 
         for(i = 0; i < ele.length; i++) { 
-            if(ele[i].type="radio") { 
+            if(ele[i].type=="radio") { 
                 if(ele[i].checked){        
                   setCookie(ele[i].name,ele[i].value,3)
                 }

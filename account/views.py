@@ -6,6 +6,7 @@ from django.contrib import messages
 from time import sleep
 from django.core.mail import send_mail,BadHeaderError
 from student.models import Student
+from quiz.models import Pin
 # from placementbot.settings import EMAIL_HOST_USER,EMAIL_HOST_PASSWORD
 # from mrbot.models import pin
 # Create your views here.
@@ -22,10 +23,17 @@ def login(request):
 
         username = request.POST['email']
         password = request.POST['psw']
+        pin=request.POST['pin']
         user=auth.authenticate(username=username,password=password)
         if user is not None:
-                auth.login(request,user)
-                return redirect('field-choice')
+                pin_obj=Pin.objects.first()
+                exam_pin=pin_obj.pin
+                if exam_pin==pin:
+                    auth.login(request,user)
+                    return redirect('field-choice')
+                else:
+                     messages.info(request,'invalid placement pin')
+                     return redirect('login')
         else:
             messages.info(request,'invalid cradentials')
             return redirect('login')

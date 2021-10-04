@@ -9,6 +9,8 @@ from datetime import date, timedelta
 from quiz import models as QMODEL
 from quiz.models import Field
 from django.contrib.auth.models import User
+from django.core.mail import send_mail,BadHeaderError
+from placementbot.settings import EMAIL_HOST_USER,EMAIL_HOST_PASSWORD
 
 
 #for showing signup/login button for student
@@ -84,28 +86,48 @@ def calculate_marks_view(request):
     if request.COOKIES.get('field_id') is not None:
         field_id = request.COOKIES.get('field_id')
         field=QMODEL.Field.objects.get(id=field_id)
-        
         total_marks=0
         questions=QMODEL.Question.objects.all().filter(field=field)
+        for q in questions:
+            total_marks=total_marks + q.marks
+        obtained_marks=0
+        
         for i in range(len(questions)):
             
             selected_ans = request.COOKIES.get(str(i+1))
             print("selected",selected_ans)
             actual_answer = questions[i].answer
             if selected_ans == actual_answer:
-                total_marks = total_marks + questions[i].marks
+                obtained_marks = obtained_marks + questions[i].marks
         user_obj = User.objects.get(id=request.user.id)
         student = models.Student.objects.get(user=user_obj)
         # student = models.Student()
         # student.user=user_obj
         # student.mobile="7878585787"
-        print(total_marks)
-        student.marks=total_marks
+        print(obtained_marks)
+        student.marks=obtained_marks
         # student.email=user_obj.email
         student.exam=field
         student.student=student
         student.save()
-
+        percetange=(float(obtained_marks)/float(total_marks))*100
+        print(percetange)
+        if percetange >=70:
+            send_mail(
+                                'Congratulations!',
+                                f'Congratulations {user_obj.first_name},\nYou are qualified for the next round.Your score is {obtained_marks} out of {total_marks}.\nSoon you will get update regarding your upcoming round.\n\nThank you and wish you good luck!',
+                                EMAIL_HOST_USER,
+                                [user_obj.email],
+                                fail_silently=False,
+                            )
+        else:
+            send_mail(
+                                'Exam Result',
+                                f'Hello {user_obj.first_name},\nSorry you have not qualified for the next round. Your score is {obtained_marks} out of {total_marks}.\n\nThank you',
+                                EMAIL_HOST_USER,
+                                [user_obj.email],
+                                fail_silently=False,
+                            )
         return redirect('/logout')
 
 
