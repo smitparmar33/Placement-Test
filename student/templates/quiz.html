@@ -15,7 +15,7 @@
     <div class="wrapper bg-white rounded">
         <div class="content"> 
 
-            <h4 class="text-muted">Multiple Choice Question | {{field.field_name}}</h4>
+            <h4 class="text-muted">Multiple Choice Question | {{field.field_name}} | <p id="demo"></p></h4>
             <!-- <h1 style="text-align: center;"></h1> -->
             <form onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
             {% csrf_token %}
@@ -29,7 +29,7 @@
                 <label class="rounded p-2 option"> {{q.option4}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option4}}" value="Option4"> <span class="checkmark"></span> </label> 
             </div> 
             {% endfor %}
-            <input type="submit" value="Submit Exam!" class="mx-sm-0 mx-1">
+            <input type="submit" id="submit" value="Submit Exam!" class="mx-sm-0 mx-1">
           </form>
         </div> 
 
@@ -58,6 +58,38 @@
 }
 
 </script> 
+
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("{{ time }}").getTime()+ 102000;
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("submit").click()
+  }
+}, 1000);
+</script>
 </body>
 </html>
 
