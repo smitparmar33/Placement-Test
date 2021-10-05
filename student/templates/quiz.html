@@ -15,8 +15,10 @@
 <body>
     <div class="navbar2">
             <h4 class="text-muted" style="margin-top: 2%;">MCQ | {{field.field_name}} | <span  class="time" id="demo"> </span></h4>
-                
+            <video id="video" width="640" height="480" autoplay style="width: 15%;height: 100%;border: solid 10px;margin-left:80%; margin-right:2%;"></video>
+
             </div>
+    
     <div class="wrapper bg-white rounded">
   
         <div class="content my-4"> 
@@ -64,8 +66,8 @@
 
 </script> 
 
-
 <script>
+
 // Set the date we're counting down to
 var countDownDate = new Date("{{ time }}").getTime()+ 602000;
 
@@ -94,6 +96,7 @@ var x = setInterval(function() {
   }
 }, 1000);
 </script>
+<script src="{% static 'js/camera.js' %}"></script>
 </body>
 </html>
 

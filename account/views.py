@@ -67,7 +67,7 @@ def register(request):
                 student.mobile=mobile
                 student.email=email
                 student.save()
-                messages.info(request, 'Registration successful. Please check your mail to know your chat_id')
+                messages.info(request, 'Registration successful. Now you can login.')
                 return render(request,'login.html',{'color':'green'})
 
         else:
