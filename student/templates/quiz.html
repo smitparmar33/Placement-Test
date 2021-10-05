@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'css/blink.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/quiz_background.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -18,8 +19,8 @@
     <br>
     <div class="navbar2">
         <span class="recording">Recording...</span>
-            <h4 class="text-muted" style="margin-top: 2%;margin-right:2%">MCQ | {{field.field_name}} | {{ name }}</h4>
-            <video id="video" width="640" height="480" autoplay style="width: 15%;height: 100%;border: solid 10px;margin-left:80%; margin-right:2%;"></video>
+            <h4  style="color:lightyellow; margin-top: 2%;margin-right:2%">MCQ | {{field.field_name}} | {{ name }}</h4>
+            <video id="video" width="640" height="480" autoplay style="width: 15%;height: 100%;border: solid 8px; border-color:lightyellow;margin-left:80%; margin-right:2%;"></video>
             <br>
             <span  class="time" style="margin-right:5%;" id="demo"> </span>
             <br>
