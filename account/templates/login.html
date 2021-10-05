@@ -29,7 +29,7 @@
                         {% csrf_token %}
                         <div class="group">
                             <label for="user" class="label">Email</label>
-                            <input id="user" name="email" type="text" class="input" required>
+                            <input id="user" name="email" type="email" class="input" required>
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Password</label>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="group">
                             <label for="pin" class="label">Placement Pin</label>
-                            <input id="pin" name="pin" type="password" class="input" required>
+                            <input id="pin" name="pin" type="password" class="input" maxlength="6" minlength="6" pattern="[0-9]{6}" required>
                         </div>
                         <div class="group">
                             <input type="submit" class="button" value="Sign In">
@@ -68,11 +68,11 @@
                         </div>
                         <div class="group">
                             <label for="user" class="label">Email</label>
-                            <input class="input" id="user" name="email" type="text" class="input" required>
+                            <input class="input" id="user" name="email" type="email" class="input" required>
                         </div>
                         <div class="group">
                             <label for="user" class="label">Mobile No.</label>
-                            <input class="input" id="user" name="mobile" type="text" class="input" required>
+                            <input class="input" id="user" name="mobile" type="text" class="input" pattern="[0-9]{10}" maxlength="10" minlength="10" required>
                         </div>
                         <div class="group">
                             <label for="user" class="label">Password</label>
