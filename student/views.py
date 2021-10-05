@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail,BadHeaderError
 from placementbot.settings import EMAIL_HOST_USER,EMAIL_HOST_PASSWORD
 import datetime
-
+from django.http import HttpResponse
 #for showing signup/login button for student
 # def studentclick_view(request):
 #     if request.user.is_authenticated:
@@ -53,12 +53,27 @@ import datetime
 
 @login_required(login_url='login')
 def field_choice(request):
-    field_name=QMODEL.Field.objects.all()
-    return render(request,'fields.html',{'field_name':field_name})
+    print("Inside choise")
+    user_obj = User.objects.get(id=request.user.id)
+    print(user_obj)
+    student = models.Student.objects.get(user=user_obj)
+    print("status.......",student.status)
+    if student.status=="started":
+        if request.session["exam_started"]:
+            pk=request.session["field"]
+            return redirect(f"/student/start-exam/{pk}")
+        else:
+            return HttpResponse("Your exam already started please try to login with same web browser")
+    elif student.status=="submitted":
+        return HttpResponse("You have already submitted your exam")
+    else:
+        field_name=QMODEL.Field.objects.all()
+        return render(request,'fields.html',{'field_name':field_name})
 
 @login_required(login_url='login')
 # @user_passes_test(is_student)
 def instruction(request,pk):
+
     field=QMODEL.Field.objects.get(id=pk)
     total_questions=QMODEL.Question.objects.all().filter(field=field).count()
     questions=QMODEL.Question.objects.all().filter(field=field)
@@ -80,9 +95,19 @@ def set_timer(request,pk):
 def start_exam_view(request,pk):
     field=QMODEL.Field.objects.get(id=pk)
     questions=QMODEL.Question.objects.all().filter(field=field)
+    user_obj = User.objects.get(id=request.user.id)
+    name=user_obj.first_name.title()+" "+user_obj.last_name.title()
+
+    student = models.Student.objects.get(user=user_obj)
+    student.status="started"
+    student.exam=field
+    student.save()
     if request.method=='POST':
         pass
-    response= render(request,'quiz.html',{'field':field,'questions':questions,'time':request.session['start_time']})
+    duration=(602000*field.duration)/10
+    request.session["field"]=pk
+    request.session["exam_started"]=True
+    response= render(request,'quiz.html',{'field':field,'questions':questions,'time':request.session['start_time'],'duration':duration,'name':name})
     response.set_cookie('field_id',field.id)
     return response
 
@@ -116,6 +141,7 @@ def calculate_marks_view(request):
         # student.email=user_obj.email
         student.exam=field
         student.student=student
+        student.status="submitted"
         student.save()
         percetange=(float(obtained_marks)/float(total_marks))*100
         print(percetange)

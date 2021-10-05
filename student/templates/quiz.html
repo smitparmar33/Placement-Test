@@ -14,9 +14,10 @@
 </head>
 <body>
     <div class="navbar2">
-            <h4 class="text-muted" style="margin-top: 2%;">MCQ | {{field.field_name}} | <span  class="time" id="demo"> </span></h4>
+            <h4 class="text-muted" style="margin-top: 2%;margin-right:2%">MCQ | {{field.field_name}} | {{ name }}</h4>
             <video id="video" width="640" height="480" autoplay style="width: 15%;height: 100%;border: solid 10px;margin-left:80%; margin-right:2%;"></video>
-
+            <br>
+            <span  class="time" style="margin-right:5%;" id="demo"> </span>
             </div>
     
     <div class="wrapper bg-white rounded">
@@ -69,7 +70,7 @@
 <script>
 
 // Set the date we're counting down to
-var countDownDate = new Date("{{ time }}").getTime()+ 602000;
+var countDownDate = new Date("{{ time }}").getTime()+ {{ duration }};
 
 // Update the count down every 1 second
 var x = setInterval(function() {

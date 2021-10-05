@@ -9,9 +9,13 @@ class Student(models.Model):
     exam = models.ForeignKey(Field,on_delete=models.CASCADE,null=True,blank=True)
     marks = models.PositiveIntegerField(null=True,blank=True)
     date = models.DateTimeField(auto_now=True)
+    status_choice = [
+    ('pending', 'pending'),
+    ('started', 'started'),
+    ('submitted', 'submitted'),
+    ]
+    status=models.CharField(max_length=20,choices=status_choice,default='pending')
 
-    def __str__(self):
-        return self.email
    
     @property
     def get_name(self):

@@ -17,6 +17,7 @@ def logout(request):
     return render(request,'thanks.html')
 
 def login(request):
+
     if request.user.is_authenticated:
         return redirect('field-choice')
     if request.method == "POST":
@@ -30,6 +31,7 @@ def login(request):
                 exam_pin=pin_obj.pin
                 if exam_pin==pin:
                     auth.login(request,user)
+                    request.session["exam_started"]=False
                     return redirect('field-choice')
                 else:
                      messages.info(request,'invalid placement pin')

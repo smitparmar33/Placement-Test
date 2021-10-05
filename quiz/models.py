@@ -10,6 +10,7 @@ class Field(models.Model):
    question_number = models.PositiveIntegerField()
    profile_pic= models.ImageField(upload_to='field_logo/',null=True,blank=True)
    total_marks = models.PositiveIntegerField()
+   duration=models.IntegerField(default=20,null=True,blank=True)
    def __str__(self):
         return self.field_name
 
