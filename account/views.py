@@ -34,10 +34,10 @@ def login(request):
                     request.session["exam_started"]=False
                     return redirect('field-choice')
                 else:
-                     messages.info(request,'invalid placement pin')
+                     messages.info(request,'Invalid placement pin')
                      return redirect('login')
         else:
-            messages.info(request,'invalid cradentials')
+            messages.info(request,'Invalid cradentials')
             return redirect('login')
     else:
         return render(request, 'login.html')
