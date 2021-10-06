@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Yudiz - Placement Drive</title>
     <link rel="stylesheet" href="{% static 'css/quiz-new.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'css/blink.css' %}">
@@ -36,8 +36,8 @@
             <form onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
             {% csrf_token %}
             {% for q in questions %}
-            <p class="text-justify h5 pb-2 font-weight-bold" style="position: absolute; ">
-            {{ forloop.counter }}. {{q.question}} </p>  <h6 style="text-align: right; color: blue;">[Marks {{q.marks}}]</h6>
+            <p class="text-justify h5 pb-2 font-weight-bold">
+            {{ forloop.counter }}. {{q.question}} </p>  <span style="text-align: right; color: blue;">[Marks {{q.marks}}]</span>
             <div class="options py-3"> 
                 <label class="rounded p-2 option"> {{q.option1}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option1}} " value="Option1"> <span class="checkmark"></span> </label>  
                 <label class="rounded p-2 option"> {{q.option2}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option2}}" value="Option2"> <span class="checkmark"></span> </label> 
