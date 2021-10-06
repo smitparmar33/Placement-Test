@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'css/blink.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/quiz_background.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body id="body">
     
     <br>
     <div class="navbar2">
@@ -27,9 +28,9 @@
             </div>
 
     
-    <div class="wrapper bg-white rounded">
-  
-        <div class="content my-4"> 
+    <div class="wrapper bg-white rounded" >
+        <h3 id="camera-msg" style="border: solid 5px; border-color:red;"></h3>
+        <div class="content my-4" id="exam-wrap"> 
             
             <!-- <h1 style="text-align: center;"></h1> -->
             <form onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
@@ -104,6 +105,25 @@ var x = setInterval(function() {
   }
 }, 1000);
 </script>
+<script>
+document.onkeydown = function(e) {
+  if(event.keyCode == 123) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+     return false;
+  }
+}
+</script>>
 <script src="{% static 'js/camera.js' %}"></script>
 <script src="{% static 'js/cutcopy.js' %}"></script>
 </body>

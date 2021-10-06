@@ -1,6 +1,6 @@
 $(document).ready(function () {
   //Disable cut copy paste
-  $('body').bind('cut copy paste', function (e) {
+  $('body').bind('cut copy paste inspect', function (e) {
     e.preventDefault();
   });
 
@@ -8,4 +8,5 @@ $(document).ready(function () {
   $("body").on("contextmenu", function (e) {
     return false;
   });
+
 });
