@@ -35,10 +35,10 @@ def login(request):
                     return redirect('field-choice')
                 else:
                      messages.info(request,'Invalid placement pin')
-                     return redirect('login')
+                     return render(request,'login.html',{'color':'red'})
         else:
             messages.info(request,'Invalid cradentials')
-            return redirect('login')
+            return render(request,'login.html',{'color':'red'})
     else:
         return render(request, 'login.html')
 
@@ -55,10 +55,10 @@ def register(request):
         if password1==password2:
             if User.objects.filter(username=username).exists():
                 messages.info(request,'Username taken')
-                return redirect('register')
+                return render(request,'login.html',{'color':'red'})
             elif User.objects.filter(email=email).exists():
                 messages.info(request,'Email already taken')
-                return redirect('register')
+                return render(request,'login.html',{'color':'red'})
             else:
                 user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name,
                                                 email=email, password=password1)
@@ -74,6 +74,6 @@ def register(request):
 
         else:
             messages.info(request,'Password not match')
-            return redirect('login')
+            return render(request,'login.html',{'color':'red'})
     else:
         return render(request,'login.html')
