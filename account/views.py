@@ -7,6 +7,9 @@ from time import sleep
 from django.core.mail import send_mail,BadHeaderError
 from student.models import Student
 from quiz.models import Pin
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
 # from placementbot.settings import EMAIL_HOST_USER,EMAIL_HOST_PASSWORD
 # from mrbot.models import pin
 # Create your views here.
@@ -77,3 +80,13 @@ def register(request):
             return render(request,'login.html',{'color':'red'})
     else:
         return render(request,'login.html')
+
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    template_name = 'password_reset.html'
+    email_template_name = 'password_reset_email.html'
+    subject_template_name = 'password_reset_subject'
+    success_message = "We've emailed you instructions for setting your password, " \
+                      "if an account exists with the email you entered. You should receive them shortly." \
+                      " If you don't receive an email, " \
+                      "please make sure you've entered the address you registered with, and check your spam folder."
+    success_url = reverse_lazy('login')
