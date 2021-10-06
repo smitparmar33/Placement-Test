@@ -5,45 +5,44 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="{% static 'js/back.js' %}"></script>
-
+  <link rel="stylesheet" href="{% static 'css/logo.css' %}">
+  <link rel="stylesheet" href="{% static 'css/background.css' %}">
+    <link rel="stylesheet" href="{% static 'css/instruction.css' %}">
 </head>
 <br><br>
 <div class="container my-4">
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-color: #151b4f;">
 
-          <h3 class="text-info text-center">Before you start the Exam, here are the rules</h3>
+          <h3 class="text-info text-center instruction-text">Before you start the Exam, here are the rules</h3>
 
         <div class="row">
 
             <div class="card border-info mx-4 my-4">
                 <div class="card-body text-info">
 
-                    <h4 class="card-title">Exam Details :</h4>
+                    <h4 class="instruction-text">Exam Details :</h4>
                     <p class="card-text">
                         </p><ul style="list-style:decimal;">
-                            <li>Exam Name : {{field.field_name}}</li>
-                            <li>Total Question : {{total_questions}}</li>
-                            <li>Total Marks : {{total_marks}}</li>
+                            <li class="instruction-text">Exam Name : {{field.field_name}}</li>
+                            <li class="instruction-text">Total Question : {{total_questions}}</li>
+                            <li class="instruction-text">Total Marks : {{total_marks}}</li>
                         </ul>
                     <p></p>
 
-                    <h4 class="card-title">Rules :</h4>
+                    <h4 class="instruction-text">Rules :</h4>
                     <p class="card-text">
                         </p><ul style="list-style:decimal;">
-                            <li>All questions are multiple choice question.</li>
-                            <li><span class="text-danger">Only one choice is correct.</span></li>
-                            <li>Every question carry different marks 
-                            </li>
-                
-                            <li>Try to answer as quickly as you can.</li>
-                            <li>If you press refresh or go back to the previous page, there will be a new question for you and the question you were on will be counted as attempted.</li>
-                            <li>Questions are displayed randomly for every user.</li>
-                            <li>You will be told your marks immediately when you submit the answer.</li>
+                            <li class="instruction-text">All questions are multiple choice question</li>
+                            <li class="instruction-text">Only one choice is correct</li>
+                            <li class="instruction-text">Your web camera and screen will be recorded</li>
+                            <li class="instruction-text">If we found any suspicious activtity during examination you will de disqualified immediately</li>
+                            <li class="instruction-text">Make sure no other application are running in background </li>
+                            <li class="instruction-text">You are not allowed to leave exam page until you not submit your exam</li>
                         </ul>
                     <p></p>
-                    <a href="{% url 'set-timer' field.id  %}" class="btn btn-info">Let's Start</a>
+                    <center><a href="{% url 'set-timer' field.id  %}" class="btn btn-info" style="background-color: #1161ee;">Let's Start</a></center>
                 </div>  
-                <div class="card-footer">Best Of Luck</div>  
+                <center><div class="card-footer" style="color: gold;">Best Of Luck!</div></center>
             </div>  
         </div>  
 
