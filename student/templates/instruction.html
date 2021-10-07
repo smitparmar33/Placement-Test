@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="{% static 'css/logo.css' %}">
   <link rel="stylesheet" href="{% static 'css/background.css' %}">
     <link rel="stylesheet" href="{% static 'css/instruction.css' %}">
+    <noscript> <div style="position: fixed; top: 0px; left: 0px; z-index: 30000000; 
+                height: 100%; width: 100%; background-color: #FFFFFF">
+        <p style="margin-left: 10px">Don't be oversmart. Please enable javascript to continue exam.</p>
+    </div></noscript>
 </head>
 <br><br>
 <div class="container my-4">
@@ -38,6 +42,7 @@
                             <li class="instruction-text">If we found any suspicious activtity during examination you will de disqualified immediately</li>
                             <li class="instruction-text">Make sure no other application are running in background </li>
                             <li class="instruction-text">You are not allowed to leave exam page until you not submit your exam</li>
+                            <li class="instruction-text">Dont refresh the page otherwise your selected answer will be gone.</li>
                         </ul>
                     <p></p>
                     <center><a href="{% url 'set-timer' field.id  %}" class="btn btn-info" style="background-color: #1161ee;">Let's Start</a></center>

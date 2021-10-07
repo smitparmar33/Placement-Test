@@ -9,7 +9,12 @@
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="{% static 'css/logo.css' %}">
     <link rel="stylesheet" href="{% static 'css/background.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Login</title>  
+    <noscript> <div style="position: fixed; top: 0px; left: 0px; z-index: 30000000; 
+                height: 100%; width: 100%; background-color: #FFFFFF">
+        <p style="margin-left: 10px">Don't be oversmart. Please enable javascript to continue exam.</p>
+    </div></noscript>
 </head>
 
 <body>
@@ -97,6 +102,26 @@
             </div>
         </div>
     </div>
+    <script>
+    document.onkeydown = function(e) {
+      if(event.keyCode == 123) {
+         return false;
+      }
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+         return false;
+      }
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+         return false;
+      }
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+         return false;
+      }
+      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+         return false;
+      }
+    }
+</script>
+<script src="{% static 'js/rightclick-ban.js' %}"></script>
 </body>
 
 </html>

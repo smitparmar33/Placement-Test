@@ -13,6 +13,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/quiz_background.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <noscript> <div style="position: fixed; top: 0px; left: 0px; z-index: 30000000; 
+                height: 100%; width: 100%; background-color: #FFFFFF">
+        <p style="margin-left: 10px">Don't be oversmart. Please enable javascript to continue exam.</p>
+    </div></noscript>
 </head>
 <body id="body">
     
@@ -123,7 +127,7 @@ document.onkeydown = function(e) {
      return false;
   }
 }
-</script>>
+</script>
 <script src="{% static 'js/camera.js' %}"></script>
 <script src="{% static 'js/cutcopy.js' %}"></script>
 </body>
