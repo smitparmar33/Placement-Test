@@ -56,8 +56,11 @@ def field_choice(request):
     print("Inside choise")
     user_obj = User.objects.get(id=request.user.id)
     print(user_obj)
-    student = models.Student.objects.get(user=user_obj)
-    print("status.......",student.status)
+    try:
+        student = models.Student.objects.get(user=user_obj)
+        print("status.......",student.status)
+    except:
+        return HttpResponse("Something went wrong you cannot login. Please contact contact@yudiz.com")
     if student.status=="started":
         if request.session["exam_started"]:
             pk=request.session["field"]
@@ -78,10 +81,11 @@ def instruction(request,pk):
     total_questions=QMODEL.Question.objects.all().filter(field=field).count()
     questions=QMODEL.Question.objects.all().filter(field=field)
     total_marks=0
+    duration=field.duration
     for q in questions:
         total_marks=total_marks + q.marks
     
-    return render(request,'instruction.html',{'field':field,'total_questions':total_questions,'total_marks':total_marks})
+    return render(request,'instruction.html',{'field':field,'total_questions':total_questions,'total_marks':total_marks,'duration':duration})
 
 def set_timer(request,pk):
     x = datetime.datetime.now()
@@ -179,9 +183,3 @@ def view_result_view(request):
 #     student = models.Student.objects.get(user_id=request.user.id)
 #     results= QMODEL.Result.objects.all().filter(exam=field).filter(student=student)
 #     return render(request,'student/check_marks.html',{'results':results})
-
-@login_required(login_url='login')
-# @user_passes_test(is_student)
-def student_marks_view(request):
-    fields=QMODEL.Field.objects.all()
-    return render(request,'student/student_marks.html',{'fields':fields})

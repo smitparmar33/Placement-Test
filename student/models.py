@@ -7,7 +7,7 @@ class Student(models.Model):
     mobile = models.CharField(max_length=20,null=False)
     email=models.EmailField(max_length = 254,null=True,blank=True)
     exam = models.ForeignKey(Field,on_delete=models.CASCADE,null=True,blank=True)
-    marks = models.PositiveIntegerField(null=True,blank=True)
+    marks = models.PositiveIntegerField(default=0)
     date = models.DateTimeField(auto_now=True)
     status_choice = [
     ('pending', 'pending'),

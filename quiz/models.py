@@ -7,16 +7,16 @@ class Pin(models.Model):
         return self.pin
 class Field(models.Model):
    field_name = models.CharField(max_length=50)
-   question_number = models.PositiveIntegerField()
+   # question_number = models.PositiveIntegerField()
    profile_pic= models.ImageField(upload_to='field_logo/',null=True,blank=True)
-   total_marks = models.PositiveIntegerField()
+   # total_marks = models.PositiveIntegerField()
    duration=models.IntegerField(default=20,null=True,blank=True)
    def __str__(self):
         return self.field_name
 
 class Question(models.Model):
     field=models.ForeignKey(Field,on_delete=models.CASCADE)
-    marks=models.PositiveIntegerField()
+    marks=models.PositiveIntegerField(default=1)
     question=models.CharField(max_length=600)
     option1=models.CharField(max_length=200)
     option2=models.CharField(max_length=200)
