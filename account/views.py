@@ -20,14 +20,21 @@ def logout(request):
     return render(request,'thanks.html')
 
 def login(request):
-
+    request.session["email"]=""
+    request.session["pass"]=""
+    request.session["pin"]=""
+    request.session["remail"]=""
+    request.session["first"]=""
+    request.session["last"] =""
+    request.session["mobile"] =""
     if request.user.is_authenticated:
         return redirect('field-choice')
     if request.method == "POST":
 
-        username = request.POST['email']
-        password = request.POST['psw']
-        pin=request.POST['pin']
+        request.session["email"]=username = request.POST['email']
+        request.session["pass"]=password = request.POST['psw']
+        request.session["pin"]=pin=request.POST['pin']
+
         user=auth.authenticate(username=username,password=password)
         if user is not None:
                 pin_obj=Pin.objects.first()
@@ -46,11 +53,19 @@ def login(request):
         return render(request, 'login.html')
 
 def register(request):
+    request.session["email"]=""
+    request.session["pass"]=""
+    request.session["pin"]=""
+    request.session["remail"]=""
+    request.session["first"]=""
+    request.session["last"] =""
+    request.session["mobile"] =""
+    request.session["remail"]=""
     if request.method=="POST":
-        first_name=request.POST['fname']
-        last_name = request.POST['lname']
-        email = request.POST['email']
-        mobile = request.POST['mobile']
+        request.session["first"] = first_name=request.POST['fname']
+        request.session["last"] = last_name = request.POST['lname']
+        request.session["remail"] = email = request.POST['email']
+        request.session["mobile"] = mobile = request.POST['mobile']
         username = request.POST['email']
         password1 = request.POST['psw']
         password2 = request.POST['psw-repeat']
