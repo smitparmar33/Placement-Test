@@ -138,8 +138,8 @@ def calculate_marks_view(request):
                                         [user_obj.email],
                                         fail_silently=False,
                                     )
-            except:
-                pass
+            except Exception as e:
+                print(e);
             request.session["count"]=0
             request.session.modified = True
             return redirect('/logout')
