@@ -8,6 +8,7 @@ class Student(models.Model):
     email=models.EmailField(max_length = 254,null=True,blank=True)
     exam = models.ForeignKey(Field,on_delete=models.CASCADE,null=True,blank=True)
     marks = models.PositiveIntegerField(default=0)
+    suspicious=models.BooleanField(default=False)
     date = models.DateTimeField(auto_now=True)
     status_choice = [
     ('pending', 'pending'),

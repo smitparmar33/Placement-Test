@@ -50,11 +50,16 @@
                 <label class="rounded p-2 option"> {{q.option4}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option4}}" value="Option4"> <span class="checkmark"></span> </label> 
             </div> 
             {% endfor %}
-            <input type="submit" id="submit" value="Submit Exam!" class="mx-sm-0 mx-1">
+            <input  type="submit" id="submit" value="Submit Exam!" class="mx-sm-0 mx-1" >
           </form>
         </div> 
 
     </div>
+    <script>
+        function makedisable(){
+            document.getElementById("submit").disabled= true
+        }
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script> 
@@ -68,6 +73,7 @@
                 }
             } 
         } 
+        document.getElementById("submit").disabled= true
           
     }
     
@@ -107,15 +113,38 @@ var x = setInterval(function() {
   if (distance < 0) {
     clearInterval(x);
     document.getElementById("submit").click()
+    document.getElementById("submit").disabled= true
   }
 }, 1000);
 </script>
 <script>
+    var count=0
+    document.addEventListener("keydown", function (event) {
+    if (event.ctrlKey) {
+             $.ajax({
+            type: 'GET',
+            url: "/student/suspicious",
+            success:function(data){
+             console.log(data.count);
+             alert("Warning :" +data.count+ " Suspicious activity detected");
+             if (data.count >2){
+                document.getElementById("submit").click();
+                document.getElementById("submit").disabled= true
+             }
+            }
+            // });
+
+            // document.getElementById("submit").click()
+
+        });
+        
+    }   
+});
 document.onkeydown = function(e) {
   if(event.keyCode == 123) {
      return false;
   }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'O'.charCodeAt(0)) {
      return false;
   }
   if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
@@ -127,6 +156,13 @@ document.onkeydown = function(e) {
   if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
      return false;
   }
+  if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.keyCode == 'P'.charCodeAt(0)) {
+     return false;
+  }
+
 }
 </script>
 <script src="{% static 'js/camera.js' %}"></script>

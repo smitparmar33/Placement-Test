@@ -12,44 +12,8 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail,BadHeaderError
 from placementbot.settings import EMAIL_HOST_USER,EMAIL_HOST_PASSWORD
 import datetime
-from django.http import HttpResponse
-#for showing signup/login button for student
-# def studentclick_view(request):
-#     if request.user.is_authenticated:
-#         return HttpResponseRedirect('afterlogin')
-#     return render(request,'student/studentclick.html')
+from django.http import HttpResponse,JsonResponse
 
-# def student_signup_view(request):
-#     userForm=forms.StudentUserForm()
-#     studentForm=forms.StudentForm()
-#     mydict={'userForm':userForm,'studentForm':studentForm}
-#     if request.method=='POST':
-#         userForm=forms.StudentUserForm(request.POST)
-#         studentForm=forms.StudentForm(request.POST,request.FILES)
-#         if userForm.is_valid() and studentForm.is_valid():
-#             user=userForm.save()
-#             user.set_password(user.password)
-#             user.save()
-#             student=studentForm.save(commit=False)
-#             student.user=user
-#             student.save()
-#             my_student_group = Group.objects.get_or_create(name='STUDENT')
-#             my_student_group[0].user_set.add(user)
-#         return HttpResponseRedirect('studentlogin')
-#     return render(request,'student/studentsignup.html',context=mydict)
-
-# def is_student(user):
-#     return user.groups.filter(name='STUDENT').exists()
-
-# @login_required(login_url='login')
-# # @user_passes_test(is_student)
-# def student_dashboard_view(request):
-#     dict={
-    
-#     'total_course':QMODEL.Field.objects.all().count(),
-#     'total_question':QMODEL.Question.objects.all().count(),
-#     }
-#     return render(request,'student/student_dashboard.html',context=dict)
 
 @login_required(login_url='login')
 def field_choice(request):
@@ -88,6 +52,7 @@ def instruction(request,pk):
     return render(request,'instruction.html',{'field':field,'total_questions':total_questions,'total_marks':total_marks,'duration':duration})
 
 def set_timer(request,pk):
+    request.session["count"]=0
     x = datetime.datetime.now()
     now = x.strftime("%b %d, %Y %H:%M:%S")
     request.session['start_time']=str(now)
@@ -115,6 +80,12 @@ def start_exam_view(request,pk):
     response.set_cookie('field_id',field.id)
     return response
 
+def suspicious(request):
+    print("called")
+    request.session["count"]+=1
+    response={"count":request.session["count"]}
+    return JsonResponse (response)
+
 
 @login_required(login_url='login')
 # @user_passes_test(is_student)
@@ -140,32 +111,50 @@ def calculate_marks_view(request):
         # student = models.Student()
         # student.user=user_obj
         # student.mobile="7878585787"
-        print(obtained_marks)
-        student.marks=obtained_marks
-        # student.email=user_obj.email
-        student.exam=field
-        student.student=student
-        student.status="submitted"
-        student.save()
-        percetange=(float(obtained_marks)/float(total_marks))*100
-        print(percetange)
-        # if percetange >=70:
-        #     send_mail(
-        #                         'Congratulations!',
-        #                         f'Congratulations {user_obj.first_name},\nYou are qualified for the next round.Your score is {obtained_marks} out of {total_marks}.\nSoon you will get update regarding your upcoming round.\n\nThank you and wish you good luck!',
-        #                         EMAIL_HOST_USER,
-        #                         [user_obj.email],
-        #                         fail_silently=False,
-        #                     )
-        # else:
-        #     send_mail(
-        #                         'Exam Result',
-        #                         f'Hello {user_obj.first_name},\nSorry you have not qualified for the next round. Your score is {obtained_marks} out of {total_marks}.\n\nThank you',
-        #                         EMAIL_HOST_USER,
-        #                         [user_obj.email],
-        #                         fail_silently=False,
-        #                     )
-        return redirect('/logout')
+        if request.session["count"] < 3:
+            print(obtained_marks)
+            student.marks=obtained_marks
+            # student.email=user_obj.email
+            student.exam=field
+            student.student=student
+            student.status="submitted"
+            student.save()
+            percetange=(float(obtained_marks)/float(total_marks))*100
+            print(percetange)
+            try:
+                if percetange >=70:
+                    send_mail(
+                                        'Congratulations!',
+                                        f'Congratulations {user_obj.first_name},\nYou are qualified for the next round.Your score is {obtained_marks} out of {total_marks}.\nSoon you will get update regarding your upcoming round.\n\nThank you and wish you good luck!',
+                                        EMAIL_HOST_USER,
+                                        [user_obj.email],
+                                        fail_silently=False,
+                                    )
+                else:
+                    send_mail(
+                                        'Exam Result',
+                                        f'Hello {user_obj.first_name},\nSorry you have not qualified for the next round. Your score is {obtained_marks} out of {total_marks}.\n\nThank you',
+                                        EMAIL_HOST_USER,
+                                        [user_obj.email],
+                                        fail_silently=False,
+                                    )
+            except:
+                pass
+            request.session["count"]=0
+            request.session.modified = True
+            return redirect('/logout')
+        else:
+            print("inside suspicious",request.session["count"])
+            student.marks=0
+            # student.email=user_obj.email
+            student.exam=field
+            student.student=student
+            student.status="submitted"
+            student.suspicious=True
+            student.save()
+            request.session["count"]=0
+            request.session.modified = True
+            return redirect('/logout')
 
 
 
