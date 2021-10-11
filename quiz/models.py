@@ -18,6 +18,7 @@ class Question(models.Model):
     field=models.ForeignKey(Field,on_delete=models.CASCADE)
     marks=models.PositiveIntegerField(default=1)
     question=models.CharField(max_length=600)
+    code = models.TextField(blank=True,null=True)
     option1=models.CharField(max_length=200)
     option2=models.CharField(max_length=200)
     option3=models.CharField(max_length=200)

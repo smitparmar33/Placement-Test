@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/quiz-new.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'css/blink.css' %}">
+    <link rel="stylesheet" href="{% static 'css/snippets.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/quiz_background.css' %}">
@@ -43,6 +44,11 @@
             {% for q in questions %}
             <p class="text-justify h5 pb-2 font-weight-bold">
             {{ forloop.counter }}. {{q.question}} </p>  <span style="text-align: right; color: blue;">[Marks {{q.marks}}]</span>
+            {% if q.code %}
+            <div class="code-block">
+                <pre><code>{{ q.code }}</code></pre>
+            </div>
+            {% endif %}
             <div class="options py-3"> 
                 <label class="rounded p-2 option"> {{q.option1}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option1}} " value="Option1"> <span class="checkmark"></span> </label>  
                 <label class="rounded p-2 option"> {{q.option2}} <input type="radio" name="{{ forloop.counter }}" id="{{q.option2}}" value="Option2"> <span class="checkmark"></span> </label> 
