@@ -81,6 +81,15 @@
                             <input class="input" id="user" name="mobile" value="{{ request.session.mobile}}" type="text" class="input" pattern="[0-9]{10}" maxlength="10" minlength="10" required>
                         </div>
                         <div class="group">
+                        <label for="college" class="label">College</label>
+
+                        <select name="college" id="college">
+                            {% for clg in college %}
+                                <option value="{{ clg }}">{{ clg }}</option>
+                            {% endfor %}
+                        </select>
+                        </div>
+                        <div class="group">
                             <label for="user" class="label">Password</label>
                             <input class="input" type="password" name="psw"
                                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"

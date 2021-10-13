@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from quiz.models import Field
 
+class College(models.Model):
+    college_name=models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.college_name
 class Student(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     mobile = models.CharField(max_length=20,null=False)
@@ -16,6 +21,7 @@ class Student(models.Model):
     ('submitted', 'submitted'),
     ]
     status=models.CharField(max_length=20,choices=status_choice,default='pending')
+    college=models.ForeignKey(College,on_delete=models.CASCADE,default=None)
 
    
     @property
