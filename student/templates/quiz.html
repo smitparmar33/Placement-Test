@@ -19,22 +19,6 @@
         <p style="margin-left: 10px">Don't be oversmart. Please enable javascript to continue exam.</p>
     </div></noscript>
     <link rel="icon" href="{% static 'img/yudiz.png' %}" type="image/x-icon">
-    <style>
-    body {
-      display: flex;
-    }
-
-    canvas {
-      position: fixed;
-      height: 30%;
-      margin-top: 5%;
-      margin-left: 83%;
-      /*margin-right: 2%;*/
-    }
-
-  </style>
-    <script defer src="{% static 'js/face-api.min.js' %}"></script>
-    <script defer src="{% static 'js/script.js' %}"></script>
 </head>
 <body id="body">
     
@@ -42,8 +26,10 @@
     <div class="navbar2">
         <span class="recording">Recording...</span>
             <h4  style="color:lightyellow; margin-top: 2%;margin-right:2%">MCQ | {{field.field_name}} | {{ name }}</h4>
-
-            <video id="video" width="200" height="200" autoplay style="width: 15%;height: 100%;border: solid 8px; border-color:lightyellow;margin-left:80%; margin-right:2%;"></video>
+            <!-- <video id="video" width="640" height="480" autoplay style="width: 15%;height: 100%;border: solid 8px; border-color:lightyellow;margin-left:80%; margin-right:2%;display:none;"></video> -->
+            <video id="video" style="display:none;" autoplay></video>
+            <canvas id="canvas" width="600px" height="400px" style="width: 15%;height: 100%;border: solid 8px; border-color:lightyellow;margin-left:80%; margin-right:2%;"></canvas>
+            
             <br>
             <span  class="time" style="margin-right:5%;" id="demo"> </span>
             <br>
@@ -190,5 +176,8 @@ document.onkeydown = function(e) {
 </script>
 <script src="{% static 'js/camera.js' %}"></script>
 <script src="{% static 'js/cutcopy.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+    <script src="{% static 'js/face.js' %}"></script>
 </body>
 </html>
