@@ -13,10 +13,17 @@ const setupcamera = () => {
 
 const detectFaces = async () => {
     const prediction = await model.estimateFaces(video, false);
+    if (prediction["length"]!=0){
+        document.getElementById("detect").innerHTML= "";
+    }
+    else{
+        document.getElementById("detect").innerHTML= "Face is not visible";
+    }
     ctx.drawImage(video, 0, 0, 600, 400);
     prediction.forEach((pred) => {
+        
         ctx.beginPath();
-        ctx.lineWidth = "4";
+        ctx.lineWidth = "8";
         ctx.strokeStyle = "blue";
         ctx.rect(
             pred.topLeft[0],
